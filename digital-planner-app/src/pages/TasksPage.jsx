@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import useTasks from "../hooks/useTasks";
-import CardContainer from "../components/CardContainer";
-import EntryCard from "../components/EntryCard";
 import "../styles/tasks.css";
 
 const TasksPage = () => {
@@ -13,7 +11,7 @@ const TasksPage = () => {
 
   const handleAddTask = (e) => {
     e.preventDefault();
-    addTask({ title, description, dueDate, priority, completed: false });
+    addTask({ title, description, dueDate, priority });
     setTitle("");
     setDescription("");
     setDueDate("");
@@ -29,7 +27,8 @@ const TasksPage = () => {
   };
 
   return (
-    <CardContainer title="Task Manager">
+    <div className="tasks-container">
+      <h2>Task Manager</h2>
       <form className="task-form" onSubmit={handleAddTask}>
         <input
           type="text"
@@ -58,26 +57,30 @@ const TasksPage = () => {
 
       {loading ? (
         <p>Loading tasks...</p>
-      ) : tasks.length === 0 ? (
-        <p>No tasks added yet.</p>
       ) : (
-        <div className="task-list">
+        <ul className="task-list">
           {tasks.map((task) => (
-            <EntryCard
+            <li
               key={task.id}
-              title={task.title}
-              description={`${task.description || ""} | Priority: ${
-                task.priority
-              }`}
-              date={task.dueDate}
-              isCompleted={task.completed}
-              onMarkDone={() => handleToggleComplete(task)}
-              onDelete={() => handleDelete(task.id)}
-            />
+              className={task.completed ? "completed-task" : ""}
+            >
+              <div className="task-info">
+                <h3>{task.title}</h3>
+                <p>{task.description}</p>
+                <p>Due: {task.dueDate}</p>
+                <p>Priority: {task.priority}</p>
+              </div>
+              <div className="task-actions">
+                <button onClick={() => handleToggleComplete(task)}>
+                  {task.completed ? "Mark Incomplete" : "Mark Complete"}
+                </button>
+                <button onClick={() => handleDelete(task.id)}>Delete</button>
+              </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </CardContainer>
+    </div>
   );
 };
 

@@ -1,12 +1,78 @@
-# React + Vite
+# 🗓️ Digital Planner App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **full-featured personal digital planner** built with **React, Firebase, and Vite** to help users manage their daily tasks, goals, journal, calendar events, and habit tracking, all with **auth, dark mode, and responsive design**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+✅ **User Authentication**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Email/password register & login (Firebase Auth)
+
+✅ **Dashboard**
+
+- Quick overview of tasks, journals, goals, habits, calendar events.
+
+✅ **Task Manager**
+
+- Add, complete, and delete tasks with priority and due dates.
+
+✅ **Journal**
+
+- Daily journal entries saved to Firestore with easy retrieval and deletion.
+
+✅ **Goal Tracker**
+
+- Add goals with target dates and visualize progress with progression bars.
+
+✅ **Habit Tracker**
+
+- Track daily habits with streak calculations.
+
+✅ **Calendar**
+
+- View, add, and manage events in a calendar view.
+
+✅ **Dark Mode Toggle**
+
+- Persistent theme with smooth transitions.
+
+✅ **Responsive UI**
+
+- Works seamlessly on desktop, tablet, and mobile.
+
+✅ **Notifications Page**
+
+- Placeholder for future user notifications.
+
+✅ **Clean, Modular Code**
+
+- Uses **Hooks, Context API, modular Firebase SDK, reusable components**.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React + Vite
+- **State Management:** React Context API
+- **Styling:** CSS with advanced styling & animations
+- **Backend:** Firebase (Auth, Firestore, Hosting)
+- **Deployment:** Netlify / Vercel
+
+---
+
+## 📸 Screenshots
+
+> Add your screenshots here (Dashboard, Journal, Tasks, etc).
+
+---
+
+## ⚙️ Setup Instructions
+
+1️⃣ **Clone the Repository:**
+
+```bash
+git clone https://github.com/yourusername/digital-planner-app.git
+cd digital-planner-app
+```

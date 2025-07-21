@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { addJournal, getJournals, deleteJournal } from "../api/firestore";
+import {
+  addJournal,
+  getJournals,
+  updateJournal,
+  deleteJournal,
+} from "../api/firestore";
 import { useAuthContext } from "../contexts/AuthContext";
-import EntryCard from "../components/EntryCard";
-import CardContainer from "../components/CardContainer";
 import "../styles/journal.css";
 
 const JournalPage = () => {
@@ -45,7 +48,8 @@ const JournalPage = () => {
   };
 
   return (
-    <CardContainer title="My Journal">
+    <div className="journal-container">
+      <h2>Daily Journal</h2>
       <form onSubmit={handleAddJournal} className="journal-form">
         <input
           type="text"
@@ -65,18 +69,16 @@ const JournalPage = () => {
       </form>
 
       <div className="journal-list">
-        {journals.length === 0 && <p>No journal entries yet.</p>}
         {journals.map((journal) => (
-          <EntryCard
-            key={journal.id}
-            title={journal.title}
-            description={journal.content}
-            date={journal.date}
-            onDelete={() => handleDelete(journal.id)}
-          />
+          <div key={journal.id} className="journal-item">
+            <h3>{journal.title}</h3>
+            <p>{journal.content}</p>
+            <p className="journal-date">{journal.date}</p>
+            <button onClick={() => handleDelete(journal.id)}>Delete</button>
+          </div>
         ))}
       </div>
-    </CardContainer>
+    </div>
   );
 };
 
