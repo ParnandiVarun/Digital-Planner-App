@@ -72,3 +72,8 @@
 .unmark-btn:hover {
   background: #d32f2f;
 }
+.habit-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}

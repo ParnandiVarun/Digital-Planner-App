@@ -1,3 +1,5 @@
+// /src/pages/HabitTrackerPage.jsx
+
 import React, { useState, useEffect } from "react";
 import { db } from "../api/firebaseConfig";
 import {
@@ -9,15 +11,13 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { useAuthContext } from "../contexts/AuthContext";
-import CardContainer from "../components/CardContainer";
-import EntryCard from "../components/EntryCard";
 import "../styles/habitTracker.css";
 
 const HabitTrackerPage = () => {
   const { user } = useAuthContext();
-  const [habits, setHabits] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [habits, setHabits] = useState([]);
 
   const fetchHabits = async () => {
     if (!user) return;
@@ -37,6 +37,7 @@ const HabitTrackerPage = () => {
   const handleAddHabit = async (e) => {
     e.preventDefault();
     if (!title) return;
+
     try {
       await addDoc(collection(db, "users", user.uid, "habits"), {
         title,
@@ -89,8 +90,9 @@ const HabitTrackerPage = () => {
   };
 
   return (
-    <CardContainer title="🌿 Habit Tracker">
-      <form className="habit-form" onSubmit={handleAddHabit}>
+    <div className="habit-container">
+      <h2>🌿 Habit Tracker</h2>
+      <form onSubmit={handleAddHabit} className="habit-form">
         <input
           type="text"
           placeholder="Habit Title"
@@ -107,31 +109,30 @@ const HabitTrackerPage = () => {
       </form>
 
       <div className="habit-list">
-        {habits.length === 0 ? (
-          <p>No habits tracked yet. Start by adding a habit above.</p>
-        ) : (
-          habits.map((habit) => {
-            const today = new Date().toISOString().split("T")[0];
-            const completedToday = habit.completedDates?.includes(today);
-            const streak = calculateStreak(habit.completedDates);
+        {habits.map((habit) => {
+          const today = new Date().toISOString().split("T")[0];
+          const completedToday = habit.completedDates?.includes(today);
+          const streak = calculateStreak(habit.completedDates);
 
-            return (
-              <EntryCard
-                key={habit.id}
-                title={habit.title}
-                description={`Streak: ${streak} day(s)${
-                  habit.description ? ` | ${habit.description}` : ""
-                }`}
-                onMarkDone={() => toggleCompletion(habit)}
-                markDoneText={
-                  completedToday ? "Unmark Today" : "Mark as Done Today"
-                }
-              />
-            );
-          })
-        )}
+          return (
+            <div
+              key={habit.id}
+              className={`habit-card ${completedToday ? "completed" : ""}`}
+            >
+              <h3>{habit.title}</h3>
+              {habit.description && <p>{habit.description}</p>}
+              <p>Streak: {streak} day(s)</p>
+              <button
+                onClick={() => toggleCompletion(habit)}
+                className={completedToday ? "unmark-btn" : "mark-btn"}
+              >
+                {completedToday ? "Unmark Today" : "Mark as Done Today"}
+              </button>
+            </div>
+          );
+        })}
       </div>
-    </CardContainer>
+    </div>
   );
 };
 

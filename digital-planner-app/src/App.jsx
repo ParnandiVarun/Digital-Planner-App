@@ -1,9 +1,7 @@
 import React from "react";
-import AppRouter from "./routes/AppRouter";
-import "./styles/globals.css";
+import Sidebar from "./components/Sidebar";
+import { Outlet } from "react-router-dom";
 
-function App() {
-  return <AppRouter />;
-}
+const App = () => {};
 
 export default App;
